@@ -1,9 +1,15 @@
-
-Microservices on container : Microservices are an architectural and organizational approach to software developmentwhere software is composed
+**Docker : Docker is an open source centralized platform designed to create deploy and run actions.
+**Microservices on container : Microservices are an architectural and organizational approach to software developmentwhere software is composed
                              of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams.
+**Docker Daemon : Docker Daemon/Docker engine manages containers, Images and operations.
+**Docker client : Docker client is a command line interface that allows user to interact with docker deamon.
+**Docker Host : The docker host is the machine that runs the docker daemon and executes container.
+**Docker Registry : Docker registry is a repositoy that stores docker images.
+**Docker Image : A docker image is a lightweight, Readonly template that contains the application code, dependencies and configurations.
+**Docker Container : this is a Running version of docker image, A container is an isolated environment for your code.
 
 
-Docker file instructions (GO language format)
+**Docker file instructions (GO language format)
 
 1. FROM : Every docker file starts with FROM cmd for base image.
 
@@ -27,3 +33,29 @@ Example- ENTRYPOINT ["installation.sh"]
 9. CMD : The CMD cmd doesn't execute during the build time. It will execute after creation of the container. There can be only one cmd in dockerfile. If u mentioned multiple 
 CMD cmds then last one will be executed.
 Example- CMD [mongodb]
+
+
+
+**Docker Commands : 
+1. To see all images present in your local machine
+   # docker images
+2. To find out images in docker hub
+   # docker search Jenkins
+3. To download image from docker hub to local machine.
+   # docker pull Jenkins
+4. To give name to container
+   #docker run -it –name container_name ubuntu bin/ bash
+5. To check service is start or not
+   #service docker status
+6. To start container
+   #docker start container_name
+7. To go inside container
+   #docker attach container_name
+8. To see all containers
+   #docker ps -a
+9. To see only running containers
+   #docker ps
+10. To stop container
+   #docker stop container_name
+11. To delete container
+   #docker rm container_name
