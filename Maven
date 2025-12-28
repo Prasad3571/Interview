@@ -1,0 +1,26 @@
+** Maven : Maven is used by Jenkins to create artificts.which is available in JAR(Java Archive), WAR(Web Archive) and EAR(Enterprise Archive) format.
+           Maven uses convention over configuration which means developers are not required to create build process themsalves
+                  _ _ _ _ _ _ _ _ _ _ _ _ _ __   _ _ _ _ _ _ _ _ _ _ _ __
+                 |                            | |                        |
+PLAN--->CODE---> | BUILD--->TEST--->ARTIFACTS | |---> DEV--->UAT--->PROD | --->OPERATE--->MONITOR
+Azure Board      | Maven    Unit     Binary   | |                        |
+/JIRA/SNow       |          Testing           | |                        |
+                 |                            | |                        |
+                 |                            | |                        |
+                 | __ _ _ _ _ _ _ _ _ _ _ _ __| |_ _ _ _ _ _ _ _ _ _ _ _ |                
+                   Continuous Integration (CI)   Continuous Delivery (CD)
+
+** Maven Lifecycle or Goals
+
+1. Validate – validate the project is correct and all necessary information is available
+2. Compile – compile the source code of the project
+3. Test – test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+4. package – take the compiled code and package it in its distributable format, such as a JAR.
+5. Verify – run any checks on results of integration tests to ensure quality criteria are met
+6. install – install the package into the local repository, for use as a dependency in other projects locally
+7. deploy – done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+
+** Maven commands 
+
+1. mvn clear package : clear existing workspace and perform goal validate to packaging.
+2. mvn clear install : perform goal validate to install.
