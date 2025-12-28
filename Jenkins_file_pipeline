@@ -1,3 +1,6 @@
+Jenkins : (CI/CD tool)
+ Jenkins is an open source automation server which enables to developers, testers, devops to build, test and deploy their softwares.
+
 Jenkins Pipeline (Groovy Format)
 
          1. Scripted Pipeline- A Jenkins pipeline defined in Groovy code with full programmatic control and flexibility.
