@@ -1,0 +1,27 @@
+Jenkins Pipeline (Groovy Format)
+
+         1. Scripted Pipeline- A Jenkins pipeline defined in Groovy code with full programmatic control and flexibility.
+
+Comp use 2. Declarative Pipeline- A Jenkins pipeline defined in a structured, predefined syntax that is easier to read and maintain.
+
+Sample Ex-
+
+
+pipeline {
+  agent any
+    stages {
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
