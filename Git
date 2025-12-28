@@ -1,0 +1,95 @@
+**Version control- Version control is a system that records changes to a file or set of files over time so that you can recall specific versions later.
+
+1. Centralized Version control System- In Centralized version control there in only one repositoy which is available remotely, If the remote repo crashed, there is a chances 
+                                       to remove all date from remote repo because of we dont have any backup of these repo.
+2. Distributed Version control System- This is the advance Version control system, here we have 2 repoitory one is avalable in user local machine and another one is available
+               remotely, If the remote repo crashed, we have backup of these repo which is availble in our local machine repo. these is a main benifit of Distributed Version
+               control System.
+
+
+** Git Commands 
+
+1. git clone <repo_url>  --->To clone data from remote repo to local repo
+2. git add . ---> To add all files in staging area
+3. git commit -m "Commit_msg" ---> -m for message, To commit data in local repo
+4. git push <repo_url> ---> To push data frol local repo to Remote repo
+
+**Git Branch : We are not allowing any developer/devops to do directly changes into main/master branch. So we nned to create our feature branch first and then do changes,
+             If our code is correct and approved by higher management then we can merge this code into master/main branch.
+             NOTE : We need to mention Request or Change ID as a feature branch name.
+
+** Git Branch commands :
+
+1. git checkout -b <new_branch_name> ----> To create and switch into new branch
+2. git branch -D <branch_name> ---> To delete branch
+3. git log ---> To check all commits with 40 digit alphanumeric checksum unique number
+4. git log --oneline ---> To check commits in oneline
+5. git branch ---> To list all branches
+6. git switch <branchname> / git checkout <branchname> ---> To switch branch
+
+** Git Merge : Merge in git allows you to join two or more developement work created using git branch into single branch(main branch)
+    NOTE - Pull request and approved merge request always raised and approved through GUI console.
+** Merge Conflict : A merge conflict in github happens when git can't automatically combile changes from different branches due to overlapping edits. which branch has conflict
+                    that must be resolved.
+
+** How to resolve conflict 
+  1. Click on resolve conflict over github
+  2. Make changes
+    <<<<<<< --->Remove This
+    >>>>>>> ---> Remove This
+  3. Click on Mark as resolved
+  4. Click on commit merge
+  5. Now status is - NO CONFLICT WITH BASE BRANCH
+  6. Click on Merge pull request/Confirm merge
+  7. Now we can see changes reflected in our base master or main branch.
+
+** git clone : To Copy repoitory from remote repo to local repo
+** git fork : Copy repositoy from one account to another account
+** git push : Push the code from local repo to remote repo
+** git pull : Git pull on the other hand brings the copy of remote directory changes into working directory.
+** git fetch : git fetch cmd fetches all the changes from the remote repo to local repo without bringing the changes into the working directory.
+
+          git pull = git fetch + git merge
+
+** git stash : Stash is a temporary storage in git, For eq- If u are working on some task, in between your manager ask u to work on another task, So that time u can temp
+ hold or stash the current task and complete manager task first and after that u can access our stashed task and u can work continue.
+
+** stash commands 
+
+1. git stash ---> stash your current file
+2. git stash apply 'stash@{0}'---> To access stashed data into workspace
+3. git stash list ---> To check stash list
+4. git stash show ---> To check stashed file data
+5. git stash clear ---> To clear all stashed files
+5. git stash drop stash@{0} ---> To delete specific stash file
+
+** git reset : git reset is a command that moves your current branch to a different commit, allowing you to undo changes.
+
+1. git reset --soft <commit>  ---> code revert back from local repo to index(stagging area)
+2. git reset --mixed <commit>  ---> code revert back from local repo to working area (workspace)
+3. git reset --hard <commit>  ---> code will be removed from every area, commit undo without commit ID.
+
+
+** git revert : code will be removed directly after commit, commit undo with new commit ID.
+
+** git rebase : Rebase is a linear merge, for example- We have created feature branch and in feature branch we have 3 commits, after that u want to rebase in that case feature
+                branch commits added as a seprate 3 commits in main branch.
+
+** git tag : In git tag means group of commits, Mostly it is used to create, list and delete commits in the repo.
+
+** .gitignore : In some repo we need to create .gitignore file and we can specify the ignore words, filename or extensuions, So user uable to commit the same data in repo.
+    Example- 1. log/
+             2. *.ninja/
+             3. *.debug/
+             4. *.svclog/
+
+** git cherry pick : Cherry picking in the git stands for applying some commit form one branch into another branch. Incase u made a mistake and commited a change into
+                     the wrong branch, bot do not want to merge the whole branch u can pick specific commit and merge it.
+
+** git hooks : git hoks are script that git executes before or after events such as commit, push and pull. this script allow u to customize and automate certain task in your
+               git workflow.
+   Example - pre-commit, pre-push, post-push
+
+  
+
+
