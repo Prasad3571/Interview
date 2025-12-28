@@ -1,3 +1,8 @@
+
+Microservices on container : Microservices are an architectural and organizational approach to software developmentwhere software is composed
+                             of small independent services that communicate over well-defined APIs. These services are owned by small, self-contained teams.
+
+
 Docker file instructions (GO language format)
 
 1. FROM : Every docker file starts with FROM cmd for base image.
