@@ -1,0 +1,24 @@
+Docker file instructions (GO language format)
+
+1. FROM : Every docker file starts with FROM cmd for base image.
+
+2. MAINTAINER : Author/Owner or Description of your image
+
+3. COPY : It will copy files and directories from host machine to the container.
+
+4. ADD : ADD cmd will copy files remotely from url.
+
+5. EXPOSE : EXPOSE cmd use To expose the port of the container or to open perticular port for container.
+
+6. WORKDIR : This cmd is similar as cd cmd, If u mention any path after WORKDIR, the shell will be changed into directory.
+
+7. RUN : RUN cmd is used to run any shell cmds and these cmds will run on top of your base image, RUN cmd will execute during the build time of your image.
+Example- RUN apt update -y && apt install nginx -y
+
+8. ENTRYPOINT : The first cmd that will execute in the container is ENTRYPOINT. The ENTRYPOINT will execute befor CMD cmd. When u want your container to be executable 
+                use ENTRYPOINT. 
+Example- ENTRYPOINT ["installation.sh"] 
+
+9. CMD : The CMD cmd doesn't execute during the build time. It will execute after creation of the container. There can be only one cmd in dockerfile. If u mentioned multiple 
+CMD cmds then last one will be executed.
+Example- CMD [mongodb]
