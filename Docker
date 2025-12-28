@@ -7,6 +7,22 @@
 **Docker Registry : Docker registry is a repositoy that stores docker images.
 **Docker Image : A docker image is a lightweight, Readonly template that contains the application code, dependencies and configurations.
 **Docker Container : this is a Running version of docker image, A container is an isolated environment for your code.
+**Docker Compose : To share multicontainer docker applications, Compose file is in yaml, yml format
+
+**Docker Networking : Docker networking is a passage through which all the isolated container communicate.
+1. Bridge network(Comp use) : It is the default network driver for a container, u use this networks when your applications is running on standalone containers, 
+                              Multiple containers communicating with the same docker host.
+   cmd-1  : docker network connect my-bridge <container_name> ----> To add container in my-bridge network
+    cmd-2 : docker inspect my-bridge ---> To show details of my-bridge network.
+
+2. Host
+3. Overlay
+4. None
+5. Macvlan
+
+
+
+** How to mount volume into the container : docker run -d --mount source=myvol,target=/tmp/data ubuntu
 
 
 **Docker file instructions (GO language format)
