@@ -1,0 +1,48 @@
+** Ansible : Ansible is an open source IT automation engine that automates provisioning, configuration management, application deployment, 
+             orchestration, and many other IT processes. Ansible is a push based Configuration management and agentless means Configuration mgmt server will
+             initiate the communication to the nodes. 
+ -- Agentles means : No extra software/package runs on node or target machines only SSH is needed.
+
+** Playbooks : Series of tasks that serve a goal, A structured YAML file in Ansible that contains one or more plays. Each play maps a group of hosts to tasks,
+               using modules, roles, or custom logic to achieve a desired state.
+
+** Handlers and Notify : Handlers are perticular task that executes when trigged by the notify module
+
+** Configuration Management : Configuration Management is an automated process that ensures the configuration of these environments is optimal.
+
+** Adhoc Commands : Ad -Hoc commands are commands which can be Run individually to perform quick functions
+
+** Ansible Module : a reusable, standalone script that Ansible executes on target systems to carry out automation tasks like installing packages, 
+                    managing files, configuring services, or handling cloud resources.
+   1. Core module : : Core modules are the modules that Ansible itself always includes and maintains.
+   2. Custom module :  Script you write that Ansible executes on managed nodes to perform specialized tasks.(commonly in Python, but can be in any language 
+                      that outputs is in JSON). Examples - apt, yum, copy, user, package, service, ping
+
+
+**Callback plugins : Callback plugins are can be used to perfoem a wide range of tasks, such as sending notifications, 
+                     logging events, even modyfying the playbooks behaviour
+   --Types-
+     1. Logging Plugin
+     2. Notification Plugin
+     3. Customization Plugin
+     4. Debugging Plugin
+
+
+** Ansible Roles : a predefined directory structure containing tasks, variables, files, templates, and handlers that encapsulate a specific function
+
+    1. Default– it stores the data about role/ application default variables example if you want to run to port 80 or 8080 then variables needs to define in this path.
+    2. Files– it contains files made to transferred to the remote VM (static files)
+    3. Handlers– They are triggers or task we can segregate all the handlers required in Playbook.
+    4. Meta– this directory content files that establish rolls dependencies example- author name, supported platform, dependencies if any.
+    5. Task– it contains all the task that is normally in the Playbook for example- installing packages and copies files etc.
+    6. Vars– Variables for the role can be specified in this directory and used in your configuration files both wars and Default stores variables.
+
+** Ansible Galaxy : Ansible Galaxy is essentially a large public repository of Ansible roles.
+
+** Ansible Vault : Allows u to keep sensitive data such as a passwords or keys in encrypted files rather than plain text.
+
+** Ansible Tower : We can use ansible tower to schedule jobs that run a playbook.
+
+** Patching.yml : Patching refers the process of updating software, OS or firmware to fix security bugs or other isssues.
+
+** Disaster Recovery (DR activity) : It is a process to restore critical business operations and IT systems after a event
