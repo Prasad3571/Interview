@@ -1,0 +1,75 @@
+** Jenkins : (CI/CD tool)
+            Jenkins is an open source automation server which enables to developers, testers, devops to build, test and deploy their softwares.
+
+** Jenkins file path : var/lib/jenkins
+
+** Plugins : It is a additional code to provide additional functionality to jenkins
+
+** How to install new plugins
+  1. Go to jenkins setting / plugins / available plugins (search and install plugin ex. docker)
+  2. need to restart jenkins when new plugins installed
+
+** Which plugin is use to take backup for jenkins
+----> ThinBackup plugin
+
+** No of executers = 2 means ---> We can run 2 jobs parallely
+
+** How to integrate jenkins with AWS
+----> 1. Adding access and secret key
+      2. IAM Role
+      3. AWS Credential plugin
+
+** Triggers : Set up automated actions that start your build based on specific events, like code changes or scheduled times.
+
+1. Trigger builds remotely : allows jobs to be started from outside Jenkins (via URL, API, or token) without manually clicking Build Now.
+2. Build after other projects are build : a Jenkins trigger that runs a job automatically after designated upstream jobs complete.
+3. Build Periodically :
+    refers 5 star(*****) strategy in Jenkins
+   1. * --> Minute - Minutes within hour
+   2. * --> Hour - Hour of the day
+   3. * --> DOM - Day of the month
+   4. * --> Month - The Month(1-12)
+   5. * --> DOW - Day of the week(0-7)
+
+4. GitHub hook trigger fot GitSCM polling : lets Jenkins start a build automatically when GitHub sends a webhook about repository changes,
+                                            instead of Jenkins periodically polling GitHub.
+5. POLL SCM : Jenkins trigger that schedules regular checks of the source code repository, starting a build if changes are detected.
+
+
+** Jenkins Master Slave Architecture:
+
+1. Jenkins master : It handles a number of tasks that include but are not limited to scheduling build jobs, recording and presenting build results, dispatching builds to
+                    slaves for execution, monitoring all the slaves offline as well as online, and others. Master Jenkins is capable of directly executing build jobs.
+2. Jenkins Slave : The Jenkins server follows the requests of the Jenkins master and is compatible with all operating systems. Building jobs dispatched by the master 
+                   are executed by the slave. The project can be suitably configured to choose a specific slave machine. 
+
+** How to restart jenkins server
+  --> in url ex. 10.10.10.106:8080/restart----->just need to enter /restart jenkins will restart.
+
+** Jenkins Pipeline (Groovy Format)
+
+         1. Scripted Pipeline- A Jenkins pipeline defined in Groovy code with full programmatic control and flexibility.
+
+Comp use 2. Declarative Pipeline- A Jenkins pipeline defined in a structured, predefined syntax that is easier to read and maintain.
+
+
+Sample Ex-
+
+pipeline {
+  agent any ---------->>run the pipeline on any available agent (node) in the Jenkins environment.
+    stages {
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
+         stage ('build') {
+           steps {
+             echo 'this is build stage'
+             }
+           }
