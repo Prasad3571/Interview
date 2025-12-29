@@ -29,8 +29,10 @@ aws_region     = "ap-south-1"
 instance_type  = "t3.medium"
 
 
+** Terraform module : a collection of .tf files that group related resources together, making infrastructure code reusable, maintainable, and easier to scale.
 
--- Terraform Commands : 
+
+** Terraform Commands : 
 
 1. terraform init : The terraform init cmd initializes a working directory containing configuration files and installs plugins for required provider.
 2. terraform validate : The terraform validate cmd validates the configuration files in a inventory.
