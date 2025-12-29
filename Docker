@@ -9,16 +9,24 @@
 **Docker Container : this is a Running version of docker image, A container is an isolated environment for your code.
 **Docker Compose : To share multicontainer docker applications, Compose file is in yaml, yml format
 
+**Docker Port Forwarding: Port forwarding or port mapping redirects a communication request from one IP address and port number combination to another.
+                          Through port forwarding, services are exposed to the applications residing outside of the host’s internal network.
+       Example- #docker run -d –name jenkins -p 8080:8080 jenkins/jenkins
+
 **Docker Networking : Docker networking is a passage through which all the isolated container communicate.
+---Types of docker networking-
 1. Bridge network(Comp use) : It is the default network driver for a container, u use this networks when your applications is running on standalone containers, 
                               Multiple containers communicating with the same docker host.
    cmd-1  : docker network connect my-bridge <container_name> ----> To add container in my-bridge network
     cmd-2 : docker inspect my-bridge ---> To show details of my-bridge network.
 
-2. Host
-3. Overlay
-4. None
-5. Macvlan
+2. Host : This driver removes the network isolation between docker containers and docker host. You can use it when you don’t need any network
+          isolation between host and container.
+3. Overlay : This network enables swarm services to communicate with each other. You use it when you want the containers to run on different Docker 
+             hosts or when you want to form swarm services by multiple applications.
+4. None : This driver disables all the networking.
+5. Macvlan : This driver assigns mac address to containers to make them look like physical devices. It routes the traffic between containers through their mac addresses.
+             You use this network when you want the containers to look like a physical device, for example, while migrating a VM setup.
 
 
 
