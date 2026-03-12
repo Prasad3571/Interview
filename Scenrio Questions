@@ -209,12 +209,22 @@ can have its own persistent storage through PersistentVolumeClaims, so data is r
 rescheduled or restarted. Pods are created and updated in a specific order, which is important for databases 
 or clustered applications that depend on a startup sequence.
 
+
+22. ReplicaSet : Ensures a specified number of pod replicas are running at any time. Usually managed 
+    indirectly via Deployments.
+
+
+23. CronJob :
+Runs Jobs on a scheduled basis, similar to cron in Linux. Example: nightly backups.
+
+
 22. ConfigMap
 A ConfigMap in Kubernetes is an object that stores non-sensitive configuration data 
 separately from application code, allowing pods to consume settings as environment variables, 
 command-line arguments, or files, so you can change configurations without rebuilding container images
 
-23. Healthchecks and LivenessProbe
+
+23. Healthchecks and LivenessProbe and ReadynessProbe
 
 In Kubernetes, health checks are used to monitor whether a container is running correctly, primarily 
 through LivenessProbe and ReadinessProbe. A LivenessProbe checks if a container is still alive—if it fails, 
