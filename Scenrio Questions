@@ -201,5 +201,41 @@ In production, we typically run around 50–70 pods across multiple namespaces, 
 and system components. We have roughly 10–15 services, such as ClusterIP for internal communication and LoadBalancer for exposing APIs. 
 Pod counts are dynamic, and autoscaling ensures the cluster adjusts resources based on traffic or load.
 
+21. Statefullset Deployment
+A Stateful Deployment in Kubernetes, implemented using a StatefulSet, is designed for applications 
+that require stable identities, persistent storage, and ordered deployment, unlike regular Deployments 
+used for stateless apps. Each pod in a StatefulSet gets a unique, stable name (like mydb-0, mydb-1) and 
+can have its own persistent storage through PersistentVolumeClaims, so data is retained even if the pod is 
+rescheduled or restarted. Pods are created and updated in a specific order, which is important for databases 
+or clustered applications that depend on a startup sequence.
 
+22. ConfigMap
+A ConfigMap in Kubernetes is an object that stores non-sensitive configuration data 
+separately from application code, allowing pods to consume settings as environment variables, 
+command-line arguments, or files, so you can change configurations without rebuilding container images
+
+23. Healthchecks and LivenessProbe
+
+In Kubernetes, health checks are used to monitor whether a container is running correctly, primarily 
+through LivenessProbe and ReadinessProbe. A LivenessProbe checks if a container is still alive—if it fails, 
+Kubernetes restarts the container to recover from crashes or deadlocks, 
+for example:
+
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 10  (delay before first check)
+  periodSeconds: 5  (interval between subsequent checks)
+
+A ReadinessProbe checks if a container is ready to accept traffic—if it fails, 
+the pod is temporarily removed from the service endpoints, which is useful for slow-starting 
+applications, 
+for example:
+
+readinessProbe:
+  tcpSocket:
+    port: 3306
+  initialDelaySeconds: 5  (wait 10 seconds after the container starts before the first check)
+  periodSeconds: 10  (check every 5 seconds if the container is ready to receive traffic.)
 
