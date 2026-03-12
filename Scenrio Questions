@@ -13,7 +13,7 @@ and manage cloud infrastructure on AWS. My main focus is automating processes, r
 and reliable deployments for the development team.
 
 
-2. Git Conflict: 
+2. Git Merge-Conflict: 
 A merge conflict in Git happens when changes in two branches affect the same part of a file and Git cannot automatically merge them. 
 To handle it, I first identify the conflicted files using Git’s markers, then manually resolve the conflict by choosing or combining the changes. 
 After resolving, I run git add to mark the files as resolved and commit the merge. This ensures the code is correctly 
