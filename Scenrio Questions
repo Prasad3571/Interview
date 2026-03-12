@@ -1,3 +1,8 @@
+Versions : 
+EKS : 1.34, In my current project we’re running EKS on Kubernetes 1.34, which is stable and fully supported, and we plan upgrades ahead of deprecated versions.
+Jenkins : 2.528.3 (LTS), In my current project we’re running Jenkins version 2.528.3 (LTS), which is stable and supported, and we plan upgrades to newer 
+          LTS releases as part of maintenance.
+
 1. Day to Day activity?
  In my current role as a DevOps engineer with around 3 years of experience, my day-to-day work mainly involves monitoring applications and infrastructure 
 to ensure everything is running smoothly. I regularly check dashboards and alerts using tools like Prometheus and Grafana. 
@@ -5,6 +10,20 @@ I also manage CI/CD pipelines using Jenkins or GitHub Actions, where I troublesh
 I work with Docker and Kubernetes to build container images and manage application deployments. Additionally, I use Terraform to provision 
 and manage cloud infrastructure on AWS. My main focus is automating processes, resolving production issues quickly, and enabling faster 
 and reliable deployments for the development team.
+
+2. Git Conflict: 
+A merge conflict in Git happens when changes in two branches affect the same part of a file and Git cannot automatically merge them. 
+To handle it, I first identify the conflicted files using Git’s markers, then manually resolve the conflict by choosing or combining the changes. 
+After resolving, I run git add to mark the files as resolved and commit the merge. This ensures the code is correctly 
+combined without losing any important changes.
+
+3. How Manage Terraform Cred or Secrets?
+
+We need to create variable.tf file and need to mention like 
+variable "aws_access_key" {
+  type      = string
+  sensitive = true
+}
 
 2. Deleted terraform.tfstate file?
   The terraform.tfstate file is very important because Terraform uses it to keep track of the infrastructure resources it manages. 
@@ -54,13 +73,6 @@ I use a pre-signed URL. A pre-signed URL is generated using AWS SDK or CLI, and 
 with the URL to download (or upload, if configured) the object for a limited time.
 Example : aws s3 presign s3://my-bucket/my-object.txt --expires-in 3600   (3600 sec = 1hr)
 
-6. Continous Delivery Vs Deployment
-For example, in a project I worked on, our team used Jenkins pipelines for a web application. 
-Every developer commit triggered automated build, unit tests, and integration tests. In Continuous Delivery, 
-the pipeline would prepare the artifact and notify the team, and we would manually approve deployment to staging or production. 
-In Continuous Deployment, after passing all tests, the artifact was automatically deployed to the staging and production environment 
-using Docker and Kubernetes, without any manual approval. This allowed us to release new features quickly while keeping production stable.
-
 7. Jenkins Architecture
  Jenkins follows a master-agent (controller-agent) architecture. The Jenkins master is the main server that manages the build environment, 
 schedules jobs, and monitors agents. It handles the web UI, stores configuration, and keeps track of the build history.
@@ -84,6 +96,22 @@ RUN pip install --no-cache-dir -r requirements.txt (Install dependencies)
 EXPOSE 5000  (Expose port 5000)
 CMD ["python", "app.py"]  (Command to run the application)
 
+11. Manage EKS Cred
+
+In my AWS projects, when working with Amazon EKS, I manage credentials securely using AWS IAM rather than hardcoding them. 
+Each user, CI/CD pipeline, or pod is assigned an IAM role with the minimum permissions needed. For accessing the cluster, 
+I generate temporary credentials using the AWS CLI or aws-iam-authenticator and update the kubeconfig with commands like 
+aws eks update-kubeconfig --region <region> --name <cluster-name>. For pods that need AWS access, I use IAM Roles for Service Accounts (IRSA) 
+so the pods can assume roles dynamically and get temporary credentials without storing secrets in code. This approach ensures secure, 
+least-privilege access, works well with Terraform-managed EKS clusters, and allows CI/CD pipelines to interact with the cluster safely without exposing 
+sensitive information.
+
+6. Continous Delivery Vs Deployment
+For example, in a project I worked on, our team used Jenkins pipelines for a web application. 
+Every developer commit triggered automated build, unit tests, and integration tests. In Continuous Delivery, 
+the pipeline would prepare the artifact and notify the team, and we would manually approve deployment to staging or production. 
+In Continuous Deployment, after passing all tests, the artifact was automatically deployed to the staging and production environment 
+using Docker and Kubernetes, without any manual approval. This allowed us to release new features quickly while keeping production stable.
 
 1. How U are managing Multi-Environment deployment?
 First thing is we have to create a multiple namespaces as per our envirnment
@@ -92,7 +120,7 @@ and then we can apply deployment file in each env like dev UAT and PROD using
 kubectl apply -f deployment.yaml -n dev , UAT and PROD as per environment
 
 2. RollBack and Rollout?
- We deploy our application on Kubernetes using rolling updates. 
+We deploy our application on Kubernetes using rolling updates. 
 When a new version is released, Jenkins updates the container image in the Kubernetes deployment. 
 Kubernetes gradually replaces old pods with new pods. We monitor rollout status using kubectl rollout status. 
 If any issue occurs, we quickly revert to the previous stable version using kubectl rollout undo.
@@ -115,4 +143,44 @@ If any issue occurs, we quickly revert to the previous stable version using kube
        sh 'kubectl rollout undo deployment/healthcare-app'
      }
    }
+
+3. Deployment Strategy - Blue Green Deployment
+Blue/Green Deployment is a strategy where you have two identical environments: one is the live environment (Blue) 
+serving all production traffic, and the other is the new version (Green). You deploy the new application version to the Green environment, 
+test it thoroughly, and when it’s verified, you switch the traffic from Blue to Green. This allows zero-downtime deployment and an easy rollback 
+if anything goes wrong.
+Example:
+Suppose we have a web application running in Kubernetes on EKS. The Blue environment is currently serving users. 
+We build a new version of the application and deploy it to the Green environment, which is fully isolated from Blue. 
+Once we verify that the Green environment is stable and passing all tests, we update the service or load balancer to route 100% of traffic to Green. 
+If a problem occurs, we can instantly switch back to Blue.
+
+4. What is Autoscaling and Autohealing in K8s
+
+In Kubernetes, autoscaling automatically adjusts resources based on demand. Horizontal Pod Autoscaler scales pods up or down 
+based on metrics like CPU, and Cluster Autoscaler adds or removes nodes if needed. For example, if traffic spikes, more pods are 
+created automatically. Autohealing ensures high availability by detecting unhealthy pods using liveness and readiness probes; if a pod fails, 
+Kubernetes automatically replaces it with a new one. Together, autoscaling and autohealing keep applications resilient and performant without manual intervention.
+
+5. What is the Services in K8s.
+a Service provides a stable network endpoint to access a set of pods, 
+even as pods are created or destroyed. It acts as a load balancer inside the cluster and ensures reliable communication. 
+There are different types: ClusterIP for internal access, NodePort to expose pods on node ports, and LoadBalancer to create an external load balancer. 
+For example :  a web app with multiple pods can be accessed by other services or users through a LoadBalancer Service, without worrying about individual pod IPs
+
+6. Pods Continous failing-Troubleshoot
+If a pod is continuously failing, I first check its status using 
+kubectl get pods and inspect events with kubectl describe pod to understand why it’s failing, s
+uch as image pull errors, resource limits, or probe failures. Then I check container logs with kubectl logs to see 
+application-specific errors and verify environment variables, secrets, and mounted volumes. I also ensure the node has enough resources 
+and no taints preventing scheduling. Once the root cause is identified, I fix the configuration or deployment and redeploy the pod, 
+monitoring it to confirm it runs successfully.
+
+7. How Much Services and How much Pods is there in your Eks
+In our EKS cluster, the number of pods and services varies by environment. 
+In production, we typically run around 50–70 pods across multiple namespaces, including application pods, monitoring, 
+and system components. We have roughly 10–15 services, such as ClusterIP for internal communication and LoadBalancer for exposing APIs. 
+Pod counts are dynamic, and autoscaling ensures the cluster adjusts resources based on traffic or load.
+
+
 
